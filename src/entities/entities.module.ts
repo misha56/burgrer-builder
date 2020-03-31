@@ -1,9 +1,8 @@
-import { Ingridients } from './ingridients.entity';
 import { Module } from '@nestjs/common';
-import {Product} from './Product.entity';
-import {TypeOrmModule} from '@nestjs/typeorm';
+import { Product } from './product.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
-export const entities = [Product, Ingridients];
+export const entities = [Product];
 
 @Module({
     imports: [TypeOrmModule.forFeature(entities)],

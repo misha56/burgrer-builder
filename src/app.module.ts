@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import { ProductModule } from './Product/Product.module';
 import { EntitiesModule, entities } from './entities/entities.module';
-import { IngredientsModule } from './ingredients/ingredients.module';
 
 @Module({
   imports: [
@@ -19,7 +18,6 @@ import { IngredientsModule } from './ingredients/ingredients.module';
     }),
     ProductModule,
     EntitiesModule,
-    IngredientsModule
   ],
   controllers: [],
   providers: [],

@@ -1,8 +1,10 @@
+import { CreateProductDto } from './../dto/create-product.dto';
 import { Controller } from '@nestjs/common';
 import { Crud } from '@nestjsx/crud';
 import {ProductService} from './Product.service';
 import {Product} from '../entities/Product.entity';
 import {ApiTags} from '@nestjs/swagger';
+import { GetProductDto } from '../dto/get-product.dto';
 
 @Crud({
     model: {
@@ -15,11 +17,12 @@ import {ApiTags} from '@nestjs/swagger';
             primary: true,
         },
     },
-    query: {
-        join: {
-            ingridients: {
-            }
-        }
+    dto: {
+        create: CreateProductDto,
+    },
+    serialize: {
+        get: GetProductDto,
+        getMany: GetProductDto,
     }
 })
 @Controller('Product')

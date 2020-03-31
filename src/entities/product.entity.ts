@@ -1,8 +1,9 @@
-import {Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn} from 'typeorm';
+import {Entity, PrimaryGeneratedColumn, Column} from 'typeorm';
 import {CrudValidationGroups} from '@nestjsx/crud';
-import {IsDefined, IsOptional, IsString, Length} from 'class-validator';
-import {ApiProperty} from '@nestjs/swagger/dist/decorators/api-property.decorator';
-import { Ingridients } from './ingridients.entity';
+import {IsDefined, IsOptional, Length, ValidateNested} from 'class-validator';
+import {Transform, serialize} from 'class-transformer'
+import {ApiProperty} from '@nestjs/swagger';
+import {CreateIngredientsDto} from '../dto/create-ingredients.dto';
 const { CREATE, UPDATE } = CrudValidationGroups;
 
 @Entity()
@@ -24,8 +25,7 @@ export class Product {
     price: number;
 
     @ApiProperty()
-    @IsOptional({ groups: [CREATE] })
-    @OneToOne(type => Ingridients)
-    @JoinColumn()
-    ingridients: Ingridients;
+    @Column({ type: 'text' })
+    @Transform(ingridients => JSON.stringify(ingridients))
+    ingredients: CreateIngredientsDto;
 }
